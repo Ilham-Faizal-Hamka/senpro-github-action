@@ -31,16 +31,16 @@ jobs:
     steps:
       - name: Build app on VM
         uses: appleboy/ssh-action@master
-         with:
-           host: ${{ secrets .HOST }}
-           username: ${ secrets.USERNAME }}
-           password: ${{ secrets .PASSWORD }}
-           port: ${{ secrets.PORT }}
-           script: |
-             eval "$(ssh-agent -s)" 
-             ssh-add ~/.ssh/senpro-ssh
-             cd ~/senpro/463602/modul01/senpro-github-action 
-             git restore .
-             git pull origin main 
-             npm install 
-             npm run build
+        with:
+          host: ${{ secrets .HOST }}
+          username: ${ secrets.USERNAME }}
+          password: ${{ secrets .PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            eval "$(ssh-agent -s)" 
+            ssh-add ~/.ssh/senpro-ssh
+            cd ~/senpro/463602/modul01/senpro-github-action 
+            git restore .
+            git pull origin main 
+            npm install 
+            npm run build
