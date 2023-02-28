@@ -1,8 +1,10 @@
-name: Test, Build, and Deploy | Modul 01 - Lab2.2 Senior Project
-on:
+name: Test, Build and Deploy |  Modul 1 lab2.2 Senior Project
+
+on: 
   push:
-    branches: [main]
-jobs:
+    branch: [main]
+
+jobs: 
   test-build:
     runs-on: ubuntu-latest
 
@@ -15,7 +17,7 @@ jobs:
       - name: Testing Build pre-Deploy
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix. node-version }}
+          node-version: ${{matrix.node-version}}
           cache: "npm"
       - run: npm i
       - run: npm run build
@@ -32,15 +34,15 @@ jobs:
       - name: Build app on VM
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets .HOST }}
-          username: ${ secrets.USERNAME }}
-          password: ${{ secrets .PASSWORD }}
-          port: ${{ secrets.PORT }}
+          host: ${{secrets.HOST}}
+          username: ${{secrets.USERNAME}}
+          password: ${{secrets.PASSWORD}}
+          port: ${{secrets.PORT}}
           script: |
-            eval "$(ssh-agent -s)" 
+            eval "${ssh-agent -s}"
             ssh-add ~/.ssh/senpro-ssh-28
-            cd ~/senpro/463602/modul01/senpro-github-action 
+            cd ~/senpro/463602/modul01/senpro-github-action
             git restore .
-            git pull origin main 
-            npm install 
+            git pull origin main
+            npm install
             npm run build
